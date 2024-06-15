@@ -1,3 +1,6 @@
+'''Hey, This is my code for creating our own array from scratch in Python. 
+This is from the topic called - Abstract Data Types'''
+
 import ctypes 
 
 class MyList:
@@ -150,7 +153,5 @@ K.append(1.2)
 K.append(90)
 K.append(23)
 print(K)
-# K.sort()
 print(K.sum())
-# print(L)
-# L.sort()
+
