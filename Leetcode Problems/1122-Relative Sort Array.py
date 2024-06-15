@@ -22,4 +22,3 @@ class Solution:
                 new_array.append(k)
         return new_array
     
-#testing out git
