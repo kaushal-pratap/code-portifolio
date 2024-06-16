@@ -3,7 +3,7 @@ class Node:
         self.data = value
         self.next = None
 
-class LinkedList:
+class LinkedList(Node):
     def __init__(self):
         self.head = None
         self.n = 0
@@ -39,8 +39,47 @@ class LinkedList:
         current.next = new_node
         self.n += 1
         
-        
+    def insert(self,value,index):
+        new_node = Node(value)
+        current = self.head
+        if self.head == None:
+            self.head = new_node
+            self.n += 1
+            return
 
+        count = 0
+        while count < index - 1:
+            current = current.next
+            count += 1
+        new_node.next = current.next
+        current.next = new_node
+        self.n += 1
+    
+    def clear(self):
+        self.head = None
+        self.n = 0
+        
+    def delete_head(self):
+        if self.head == None:
+            return 'Error : Linked List empty'
+        self.head = self.head.next
+        self.n = self.n - 1
+        
+    def pop(self):
+        if self.head == None:
+            return 'Error : Empty Linked List'
+        
+        current = self.head
+        if current.next == None:
+            self.delete_head()
+            return
+        
+        while current.next.next!= None:
+            current = current.next
+        current.next = None   
+        self.n = self.n - 1     
+                
+           
 L = LinkedList()
 # L.insert_head(1)
 # L.insert_head(2)
@@ -48,8 +87,10 @@ L = LinkedList()
 # L.insert_head(8)
 # L.insert_head(3)
 L.insert_head(20)
-print(len(L))
 L.append(1)
 L.append(1000)
+L.insert('hi',1)
 # L.insert_head(121)
+
 print(L)
+print(len(L))
