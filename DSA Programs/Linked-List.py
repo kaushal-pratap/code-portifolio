@@ -79,7 +79,53 @@ class LinkedList(Node):
         current.next = None   
         self.n = self.n - 1     
                 
-           
+                
+    def delete(self,value):
+        current = self.head
+        try :
+            
+            if current == None:
+                return 'Emptu linked list'
+            
+            if current.data == value:
+                self.delete_head()
+                return
+            while current.next.data != value:
+                current = current.next
+            if current.next.data == value:
+                current.next = current.next.next
+                self.n -= 1
+                return
+        except:
+             print('ELemet Not Found')
+        
+    
+    def find(self,value):
+        index = 0
+        current = self.head
+        while current != None:
+            if current.data == value:
+                print(index)
+                return
+            index += 1
+            current = current.next
+        print('Element Not found')
+        return
+    
+    def __getitem__(self,index):
+        current = self.head 
+        pos = 0
+        while current != None:
+            if pos == index:
+                print(current.data)
+                return
+            pos += 1
+            current = current.next
+        return 'Index out of range'
+
+
+
+
 L = LinkedList()
 # L.insert_head(1)
 # L.insert_head(2)
@@ -91,6 +137,8 @@ L.append(1)
 L.append(1000)
 L.insert('hi',1)
 # L.insert_head(121)
-
+L.delete(1)
+L.find(20)
 print(L)
 print(len(L))
+print(L[0])
