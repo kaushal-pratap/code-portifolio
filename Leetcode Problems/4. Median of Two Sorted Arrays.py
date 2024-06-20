@@ -17,17 +17,9 @@ Explanation: merged array = [1,2,3] and median is 2.
 class Solution:
     def findMedianSortedArrays(self, nums1: list[int], nums2: list[int]) -> float:
         new_array = sorted(nums1 + nums2)
-        
-        if len(new_array) == 1:
-            return(new_array[0])
-            
-        if len(new_array) == 2:
-            return((new_array[0] + new_array[1])/2)
-            
-        
+    
         if len(new_array) % 2 == 0:
             return((new_array[int(len(new_array)/2)] + new_array[int(len(new_array)/2)-1])/2)
             
         return(new_array[int(len(new_array)/2)])
-    
         
