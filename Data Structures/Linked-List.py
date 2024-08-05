@@ -1,123 +1,127 @@
 class Node:
-    def __init__(self,data):
-        self.data = data
+    def __init__(self,value):
+        self.data = value
         self.next = None
-        
-class LinkedList:
+
+class LinkedList():
     def __init__(self):
         self.head = None
         self.n = 0
         
-    def insertAtBegin(self,data):
-        new_node = Node(data)
+    def __len__(self):
+        return self.n
+    
+    def insert_at_head(self,value):
+        new_node = Node(value)
         if self.head == None:
             self.head = new_node
+            self.n += 1
             return
         new_node.next = self.head
         self.head = new_node
         self.n += 1
         
-    def insertAtIndex(self,data,index):
-        if index == 0:
-            self.insertAtBegin(data)
-        position = 0
-        current_node = self.head
-        while (current_node != None and position+1 != index):
-            position += 1
-            current_node = current_node.next
-        if current_node != None:
-            new_node = Node(data)
-            new_node.next = current_node.next
-            current_node.next = new_node
-        else:
-            print('Index not present')
-        self.n += 1
+    def __str__(self):
+        current = self.head
+        result = ''
+        while current != None:
+            result += str(current.data) + ' -> '
+            current = current.next
             
-    def insertAtEnd(self,data):
-        new_node = Node(data)
+        return result[:-4]
+    
+    
+    def append(self,value):
         if self.head == None:
-            self.head = new_node
-            self.n += 1
-            return
-        
-        current_node = self.head
-        while current_node.next != None:
-            current_node = current_node.next
-        current_node.next = new_node
+            return self.insert_at_head(value)
+        new_node = Node(value)
+        current = self.head 
+        while current.next != None:
+            current = current.next
+        current.next = new_node
         self.n += 1
         
-    def updateNode(self,val,index):
-        current_node = self.head
-        position = 0
-        if position == index:
-            current_node.data = val
-        else:
-            while (current_node != None and position != index):
-                position += 1
-                current_node = current_node.next
-                
-            if current_node != None:
-                current_node.data = val
-            else:
-                print("Index not present")
-                
-    def remove_first_node(self):
+        
+    def insert(self,value, index):
+        new_node = Node(value)
         if self.head == None:
+            return self.insert_at_head(value)
+        current = self.head
+        position = 0
+        while current != None and position != index:
+            current = current.next
+            position += 1
+        if current != None:
+            new_node.next = current.next
+            current.next = new_node
+            self.n += 1
+        else:
+            print("Index not found")
+            r
+        self.head = None
+        self.n = 0
+        
+    def delete_head(self):
+        if self.head == None:
+            print("Linked List already empty")
             return
+        
         self.head = self.head.next
         self.n -= 1
-                
-    def remove_last_node(self):
+        
+    def pop(self):
         if self.head == None:
+            return 'Linked List is empty'
+        current = self.head
+        if current.next == None:
+            self.delete_head()
             return
-        current_node = self.head
-        while (current_node.next != None and current_node.next.next != None):
-            current_node = current_node.next
-        current_node.next = None
+        while current.next.next != None:
+            current = current.next
+        current.next = None
         self.n -= 1
         
-    def remove_at_index(self,index):
+    def delete(self,value):
+        current = self.head
         if self.head == None:
-            return
+            return 'Linked List is empty'
+        if self.head.data == value:
+            return self.delete_head()
+        while current.next.next != None:
+            if current.next.data == value:
+                current.next = current.next.next
+                self.n -= 1
+                return
+            current = current.next
+        while current.next != None:
+            current = current.next
+        if current.data == value:
+            return self.pop()
+        return 'Value not found'
+    
+    
+    def find(self,value):
+        index = 0
+        current = self.head
+        while current != None:
+            if current.data == value:
+                return index
+            index += 1
+            current = current.next
+        return 'Element not found'
+    
+
+    
+    
+    
+L = LinkedList()
+L.append(9)
+L.insert_at_head(10)
+L.insert(2,0)
+L.append(98)
+L.delete(98)
+L.find(9)
+print(L)
+print(len(L))
         
-        current_node = self.head
-        position = 0
-        if position == index:
-            self.remove_first_node()
-            self.n -= 1
-        else:
-            while (current_node != None and position + 1 != index):
-                position += 1
-                current_node = current_node.next
-            if current_node != None:
-                current_node.next = current_node.next.next
-            else:
-                print("Index not present")
-            self.n -= 1
     
-    def remove_node(self,data):
-        current_node = self.head
-        if current_node.data == data:
-            self.remove_first_node()
-            self.n -= 1 
-            return
-        while current_node != None and current_node.next.data != data:
-            current_node = current_node.next
-            
-        if current_node == None:
-            return
-        current_node.next = current_node.next.next
-        self.n -= 1
-    
-    
-    
-    def printLL(self):
-        current_node = self.head
-        while (current_node != None):
-            print(current_node.data)
-            current_node = current_node.next
-    
-            
-list = LinkedList()
-list.insertAtBegin('a')
-list.printLL()
