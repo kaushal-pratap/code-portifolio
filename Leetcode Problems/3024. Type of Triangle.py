@@ -1,6 +1,7 @@
 '''3024. Type of Triangle
 
 https://leetcode.com/problems/type-of-triangle/description
+
 '''
 class Solution:
     def triangleType(self, nums: list[int]) -> str:
