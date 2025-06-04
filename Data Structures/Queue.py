@@ -11,6 +11,3 @@ class Queue():
         if not self.is_empty():
             return self.values.pop(0)
         return None
-
-#Meri didi pagal hai
-#Aur me accha baccha hu 
